@@ -16,11 +16,7 @@ const localStorageApi = new localStorageAPI();
 moviesContainer.addEventListener('click', onMovieCardClick);
 
 export async function onMovieCardClick(e) {
-  // console.log('onMovieCardClick e: ', e);
-  // console.log('onMovieCardClick e.target: ', e.target);
-  // console.log('onMovieCardClick e.target: ', e.target.closest('li'));
   const targetFilm = e.target.closest('li').dataset.id; // id текущего фильма при открытии модалки
-  // console.log('targetFilm: ', targetFilm);
   if (e.target.nodeName === 'UL') {
     return;
   }
@@ -29,11 +25,9 @@ export async function onMovieCardClick(e) {
   // console.log(localStorageApi.getData('current-film'));
 
   const movies = localStorageApi.getData('movies'); // забираем фильмы из Local Storage по тегу "movies"
-  // console.log('movies: ', movies);
+
   const parsedGenres = localStorageApi.getData('genresList'); // забираем жанры из Local Storage
   const film = movies.filter(({ id }) => id === Number(targetFilm))[0]; // метод filter возвращает массив, поэтому берем элемент этого массива
-  // console.log('film: ', film);
-
   const { genre_ids } = film;
   let genres;
   if (genre_ids) {
@@ -53,22 +47,22 @@ export async function onMovieCardClick(e) {
   // }
 }
 
-// form.addEventListener('submit', onFormInputHandler);
+form.addEventListener('submit', onFormInputHandler);
 
-function onFormInputHandler(event) {
+async function onFormInputHandler(event) {
   event.preventDefault();
   const movieName = form.elements.searchQuery.value.trim();
   if (movieName === '') {
     return console.log('Empty search query');
   }
 
-  // galletyFetchAndRender(movieName);
-  // resetPage();
+  galleryFetchAndRender(movieName);
+  form.reset();
+  return;
 }
 
-async function galletyFetchAndRender(movieName) {
+async function galleryFetchAndRender(movieName) {
   const res = await fetchMoviesByName(movieName);
-  // console.log('search by Name: ', res, '      total_pages: ', res.total_pages);
   galleryRender(res, movieName);
 }
 
@@ -105,4 +99,4 @@ function galleryRender(itemRender, movieName) {
   // form.reset();
 }
 
-export { galletyFetchAndRender, galleryFetchAndRenderByID };
+export { galleryFetchAndRender, galleryFetchAndRenderByID };

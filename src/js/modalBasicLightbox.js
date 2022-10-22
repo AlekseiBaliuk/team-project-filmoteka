@@ -117,29 +117,30 @@ function modalBasicLightbox(
 
   instance.show();
 
-  async function tryFetch() {
-    const trailer = await fetchTrailerById(id);
-    const resultType = trailer.results;
-    const typeObj = resultType.find(result => result.type === 'Trailer');
-    if (resultType.length === 0 || typeObj.type !== 'Trailer') {
-      trailerBtnEl.style.display = 'none';
-      return;
-    }
-    return;
-  }
-  tryFetch();
+  // async function tryFetch() {
+  //   const trailer = await fetchTrailerById(id);
+  //   const resultType = trailer.results;
+  //   const typeObj = resultType.find(result => result.type === 'Trailer');
+  //   console.log(typeObj);
+  //   if (resultType.length === 0 || typeObj.type !== 'Trailer') {
+  //     trailerBtnEl.style.display = 'none';
+  //     return;
+  //   }
+  //   return;
+  // }
+  // tryFetch();
 
   const trailerBtnEl = document.querySelector('.trailer__button');
   trailerBtnEl.addEventListener('click', getLinkTrailer);
 }
 
 async function getLinkTrailer(e) {
-  const trailerBtnEl = document.querySelector('.trailer__button');
   const movieId = e.target.dataset.id;
   const trailer = await fetchTrailerById(movieId);
   const resultType = trailer.results;
   const typeObj = resultType.find(result => result.type === 'Trailer');
-  if (resultType.length === 0 || typeObj.type !== 'Trailer') {
+  if (typeObj.type !== 'Trailer') {
+    const trailerBtnEl = document.querySelector('.trailer__button');
     trailerBtnEl.style.display = 'none';
     return;
   }

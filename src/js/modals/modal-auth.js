@@ -8,7 +8,7 @@ const closeModalSignUpEl = document.querySelector('.close-signup-btn');
 const closeModalLogInel = document.querySelector('.close-login-btn');
 
 const openModal = document.querySelector('.login-btn');
-console.log('openModal = ', openModal);
+// console.log('openModal = ', openModal);
 openModal.addEventListener('click', toggleModal);
 
 const inputEl = document.querySelector('#registration-form-password');

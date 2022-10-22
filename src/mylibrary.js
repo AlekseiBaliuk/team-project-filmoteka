@@ -1,5 +1,4 @@
 import './js/my-library';
-
 import './js/teamModal';
 import './js/preloader';
 import './js/modals/modal-auth';
